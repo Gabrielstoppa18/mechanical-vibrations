@@ -3,7 +3,10 @@ import matplotlib.pyplot as plt
 
 
 
-def system(q,ti,tf,h,m1,m2,x11,x12,x21,x22,K1):
+def system(q,m1,m2):
+  ti=0; tf=2;h=0.005
+  x11=1.2;x12=-1.3; x21=1.4; x22=1.5
+  K1=0.50
   g=9.81
     #deslocamento da massa 1
   q1=[]

@@ -4,17 +4,14 @@ import numpy as np
 import math
 
 def objetivo(s):
-    return max(s[4])
+    g=sys.system(s[0],s[1],s[2])
+    return max(g[4])
 
 def S_init():
-    ti=0; tf=2;h=0.005 
-    m1=1.94; m2=0.10; x11=1.2; x12=-1.3; x21=1.4; x22=1.5
-    K1=10
+    m1=1.94; m2=0.10; 
     q=[0.91,1.01,0.89,1.04]
 
-    
-
-    return q,ti,tf,h,m1,m2,x11,x12,x21,x22,K1
+    return q,m1,m2
 
 def SA():
     alpha =0.90
@@ -22,10 +19,10 @@ def SA():
     Tf = 1
     T0 = 10
     s=S_init()
-    sol_ini=sys.system(s[0],s[1],s[2],s[3],s[4],s[5],s[6],s[7],s[8],s[9],s[10])
     lbl="Solucao Inicial"
-    sys.printer(sol_ini[0],sol_ini[1],sol_ini[2],sol_ini[3],sol_ini[4],lbl)
-    valor=objetivo(sol_ini)
+    k=sys.system(s[0],s[1],s[2])
+    sys.printer(k[0],k[1],k[2],k[3],k[4],lbl)
+    valor=objetivo(s)
     print("Valor inicial:", valor)
     
     Xb = s
@@ -35,7 +32,7 @@ def SA():
     while T >= Tf:
         for i in range(it):
             #print('-----------------ITERAÇÃO------------------')
-            xx=objetivo(sol_ini)
+            xx=objetivo(s)
             Y=s
             rd = np.random.randint(0,1)
             if rd == 0:
@@ -43,10 +40,7 @@ def SA():
                 
             elif rd == 1:
                 N_2(Y)
-
-
-            s_aux=sys.system(Y[0],Y[1],Y[2],Y[3],Y[4],Y[5],Y[6],Y[7],Y[8],Y[9],Y[10])
-            yy=objetivo(s_aux)
+            yy=objetivo(Y)
             delta = yy-xx
             if delta <= 0:
                 SOL = Y
@@ -62,7 +56,8 @@ def SA():
             #print(xxb)
         T=alpha*T
     s=SOL    
-    solucao=sys.system(s[0],s[1],s[2],s[3],s[4],s[5],s[6],s[7],s[8],s[9],s[10])
+    solucao=sys.system(s[0],s[1],s[2])
+    print("Valor final: ", max(solucao[4]))
     label="-Solução Final do Problema:"
     sys.printer(solucao[0],solucao[1],solucao[2],solucao[3],solucao[4],label)
     

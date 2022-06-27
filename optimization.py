@@ -55,7 +55,7 @@ def SA():
                 xxb = xx
             #print(xxb)
         T=alpha*T
-    s=SOL    
+    s=Xb    
     solucao=sys.system(s[0],s[1],s[2])
     print("Valor final: ", max(solucao[4]))
     label="-Solução Final do Problema:"
